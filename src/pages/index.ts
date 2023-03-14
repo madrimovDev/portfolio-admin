@@ -1,1 +1,1 @@
-export {Layout} from '@/widgets';
+export {Login} from './login';
