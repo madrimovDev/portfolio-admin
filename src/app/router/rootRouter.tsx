@@ -1,4 +1,4 @@
-import {Login} from '@/pages';
+import {Bio, Login, Skills} from '@/pages';
 import {Layout} from '@/widgets';
 import {createBrowserRouter} from 'react-router-dom';
 
@@ -8,8 +8,12 @@ const rootRouter = createBrowserRouter([
 		element: <Layout />,
 		children: [
 			{
-				index: true,
-				element: 'Element',
+				path: '',
+				element: <Bio />,
+			},
+			{
+				path: '/skills',
+				element: <Skills />,
 			},
 		],
 	},
