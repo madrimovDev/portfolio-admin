@@ -1,7 +1,13 @@
-import { withPageTransition } from "@shared";
 import React from "react";
+import { PageTitle, withPageTransition } from "@shared";
+import { HeroList } from "@entities";
 
 export const Hero = withPageTransition(() => {
-	return <div>Hero</div>;
+	return (
+		<div>
+			<PageTitle title="Hero" />
+			<HeroList />
+		</div>
+	);
 });
 

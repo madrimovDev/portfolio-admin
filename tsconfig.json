@@ -22,7 +22,8 @@
 			"@app": ["./app"],
 			"@assets": ["./assets"],
 			"@shared": ["./shared"],
-			"@widgets": ["./widgets"]
+			"@widgets": ["./widgets"],
+			"@entities": ["./entities"]
 		}
 	},
 	"include": ["src"],

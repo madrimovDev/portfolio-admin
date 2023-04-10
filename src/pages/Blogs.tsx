@@ -1,7 +1,12 @@
-import { withPageTransition } from "@shared";
+import { PageTitle, withPageTransition } from "@shared";
 import React from "react";
 
 export const Blogs = withPageTransition(() => {
-	return <div>Blogs</div>;
+	return (
+		<div>
+			<PageTitle title="Experience" />
+		</div>
+	);
 });
+
 
