@@ -1,1 +1,5 @@
-@import "semantic-ui-css/semantic.min.css";
+@tailwind base;
+@tailwind components;
+@tailwind variants;
+@tailwind utilities;
+

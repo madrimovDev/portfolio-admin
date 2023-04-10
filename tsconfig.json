@@ -21,7 +21,8 @@
 			"@pages": ["./pages"],
 			"@app": ["./app"],
 			"@assets": ["./assets"],
-			"@shared": ["./shared"]
+			"@shared": ["./shared"],
+			"@widgets": ["./widgets"]
 		}
 	},
 	"include": ["src"],
