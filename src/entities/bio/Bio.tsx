@@ -1,31 +1,109 @@
-import React, { FormEvent, useEffect } from "react";
-import { useBio } from "./model/useBio";
+import React, { FC, FormEvent, useEffect, useState } from "react";
+import { BioResponse, useBio } from "./model/useBio";
 import {
-	Box,
 	Container,
 	Divider,
 	List,
 	ListItem,
-	ListItemSecondaryAction,
-	ListItemText,
 	Typography,
-	TextField,
-	Input,
-	Button,
 	Grid,
-	Stack,
+	Box,
+	Input,
+	TextField,
+	Button,
 } from "@mui/material";
-import { Label } from "@mui/icons-material";
+import { Check, Close } from "@mui/icons-material";
+
+type Editable = {
+	data: string | undefined;
+};
+
+type EditableType = {
+	as?: keyof HTMLElementTagNameMap;
+	handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
+	fieldName: string;
+};
+
+const EditableText: FC<Editable & EditableType> = ({
+	data,
+	handleSubmit,
+	as = "div",
+	fieldName,
+}) => {
+	const [editing, setEditing] = useState<boolean>(false);
+	if (editing) {
+		return (
+			<Box
+				component="form"
+				onSubmit={(event) => {
+					handleSubmit(event);
+					setEditing(false);
+				}}
+			>
+				{as !== "img" ? (
+					<TextField
+						name={fieldName}
+						variant="standard"
+						defaultValue={data}
+						size="small"
+					/>
+				) : (
+					<Input
+						type="file"
+						name="img"
+					/>
+				)}
+				<Button
+					color="success"
+					size="small"
+					type="submit"
+				>
+					<Check />
+				</Button>
+				<Button
+					color="error"
+					size="small"
+					type="button"
+					onClick={() => setEditing(false)}
+				>
+					<Close />
+				</Button>
+			</Box>
+		);
+	}
+	if (as === "img") {
+		return (
+			<Box
+				component="img"
+				src={data}
+				height={100}
+				sx={{
+					cursor: "pointer",
+				}}
+				onClick={() => setEditing(true)}
+			/>
+		);
+	}
+	return (
+		<Box
+			sx={{
+				cursor: "pointer",
+			}}
+			component={as}
+			onClick={() => setEditing(true)}
+		>
+			{data}
+		</Box>
+	);
+};
 
 export const Bio = () => {
-	const { bio, getBio, createBio } = useBio();
+	const { bio, getBio, updateBio } = useBio();
 
-	const handleSubmit = (
-		event: FormEvent<HTMLFormElement> & FormEvent<HTMLDivElement>
-	) => {
+	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
-		createBio(formData);
+		updateBio(formData, bio?.hero.id);
 		event.currentTarget.reset();
 	};
 
@@ -39,7 +117,6 @@ export const Bio = () => {
 		<>
 			<Typography variant="h4">Bio</Typography>
 			<Divider sx={{ my: 4 }} />
-
 			<Container maxWidth="sm">
 				<List>
 					<ListItem
@@ -52,7 +129,11 @@ export const Bio = () => {
 						>
 							Title
 						</Grid>
-						<Grid>{bio?.hero.title}</Grid>
+						<EditableText
+							fieldName="title"
+							handleSubmit={handleSubmit}
+							data={bio?.hero.title}
+						/>
 					</ListItem>
 					<ListItem>
 						<Grid
@@ -61,7 +142,11 @@ export const Bio = () => {
 						>
 							Subtitle
 						</Grid>
-						<Grid>{bio?.hero.subtitle}</Grid>
+						<EditableText
+							fieldName="subtitle"
+							handleSubmit={handleSubmit}
+							data={bio?.hero.subtitle}
+						/>
 					</ListItem>
 					<ListItem>
 						<Grid
@@ -70,7 +155,11 @@ export const Bio = () => {
 						>
 							Description
 						</Grid>
-						<Grid>{bio?.hero.description}</Grid>
+						<EditableText
+							fieldName="description"
+							handleSubmit={handleSubmit}
+							data={bio?.hero.description}
+						/>
 					</ListItem>
 					<ListItem>
 						<Grid
@@ -79,68 +168,14 @@ export const Bio = () => {
 						>
 							Img
 						</Grid>
-						<Grid
-							component={"img"}
-							src={"http://localhost:3000/" + bio?.hero.img}
-							height={100}
+						<EditableText
+							data={`http://localhost:3000/${bio?.hero.img}`}
+							fieldName="img"
+							handleSubmit={handleSubmit}
+							as="img"
 						/>
 					</ListItem>
 				</List>
-				<Divider />
-				<Box
-					onSubmit={handleSubmit}
-					sx={{
-						display: "flex",
-						flexDirection: "column",
-						gap: 2,
-						mt: 2,
-					}}
-					component="form"
-					encType="multipart/form-data"
-				>
-					<TextField
-						sx={{ width: "100%" }}
-						name="title"
-						label="Title"
-					/>
-					<TextField
-						sx={{ width: "100%" }}
-						name="subtitle"
-						label="Subtitle"
-					/>
-					<TextField
-						sx={{ width: "100%" }}
-						name="description"
-						label="Description"
-					/>
-					<Input
-						name="img"
-						slots={{
-							root: Button,
-							input: 'input',
-						}}
-						type="file"
-					/>
-
-					<Stack
-						direction="row"
-						spacing={2}
-					>
-						<Button
-							variant="contained"
-							type="submit"
-						>
-							Create
-						</Button>
-						<Button
-							color="error"
-							variant="contained"
-							type="reset"
-						>
-							Reset
-						</Button>
-					</Stack>
-				</Box>
 			</Container>
 		</>
 	);
