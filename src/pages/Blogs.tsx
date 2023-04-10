@@ -1,7 +1,7 @@
-import React from 'react'
+import { withPageTransition } from "@shared";
+import React from "react";
 
-export const Blogs = () => {
-  return (
-    <div>Blogs</div>
-  )
-}
+export const Blogs = withPageTransition(() => {
+	return <div>Blogs</div>;
+});
+

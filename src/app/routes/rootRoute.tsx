@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { Login, Hero, Experience, Works, Blogs } from "@pages";
 import { Layout } from "@widgets";
 
-export const rootRoute = createBrowserRouter([
+export const rootRoute = [
 	{
 		path: "/",
 		element: <Layout />,
@@ -20,7 +20,7 @@ export const rootRoute = createBrowserRouter([
 				element: <Works />,
 			},
 			{
-				path: "blogs",
+				path: "/blogs",
 				element: <Blogs />,
 			},
 		],
@@ -29,5 +29,5 @@ export const rootRoute = createBrowserRouter([
 		path: "/login",
 		element: <Login />,
 	},
-]);
+];
 

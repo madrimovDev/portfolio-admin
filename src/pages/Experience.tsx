@@ -1,7 +1,7 @@
-import React from 'react'
+import { withPageTransition } from "@shared";
+import React from "react";
 
-export const Experience = () => {
-  return (
-    <div>Experience</div>
-  )
-}
+export const Experience = withPageTransition(() => {
+	return <div>Experience</div>;
+});
+
