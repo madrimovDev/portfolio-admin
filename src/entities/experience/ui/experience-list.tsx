@@ -20,14 +20,15 @@ const ListItem: FC<ItemProps> = ({ description, year }) => {
 					defaultValue={year}
 				/>
 				<Textarea
-          name="description"
-          className="w-full"
+					name="description"
+					className="w-full"
 					defaultValue={description}
 				/>
 				<Button>
 					<BsCheck />
 				</Button>
 				<Button
+					onClick={() => setEdit(false)}
 					danger
 					type="reset"
 				>
@@ -39,7 +40,7 @@ const ListItem: FC<ItemProps> = ({ description, year }) => {
 
 	return (
 		<li
-			className="flex gap-4"
+			className="flex gap-4 cursor-pointer mb-4"
 			onClick={() => setEdit(true)}
 		>
 			<span>{year}</span>
@@ -50,7 +51,11 @@ const ListItem: FC<ItemProps> = ({ description, year }) => {
 
 export const ExperienceList = () => {
 	return (
-		<ul className="max-w-2xl w-full mx-auto">
+		<ul className="max-w-2xl w-full mx-auto mt-6">
+			<ListItem
+				year={2021}
+				description="Lorem ipsum, dolor sit amen consectetur adipisicing elit. Atque ipsa sed aut placeat deleniti, quam porro, obcaecati sapiente delectus nisi, possimus quod praesentium illo? Necessitatibus qui impedit beatae natus error!"
+			/>
 			<ListItem
 				year={2021}
 				description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque ipsa sed aut placeat deleniti, quam porro, obcaecati sapiente delectus nisi, possimus quod praesentium illo? Necessitatibus qui impedit beatae natus error!"
@@ -58,4 +63,5 @@ export const ExperienceList = () => {
 		</ul>
 	);
 };
+
 

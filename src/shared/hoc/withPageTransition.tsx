@@ -13,7 +13,7 @@ export const withPageTransition = <P extends {} = {}>(
 				exit={{ y: 30, opacity: 0 }}
 				transition={{
 					type: "spring",
-					duration: 0.4,
+					duration: 0.3,
 				}}
 			>
 				<Component {...rest} />

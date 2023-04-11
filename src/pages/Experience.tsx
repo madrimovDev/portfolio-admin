@@ -1,4 +1,4 @@
-import { ExperienceList } from "@entities";
+import { CreateExperience, ExperienceList } from "@entities";
 import React from "react";
 import { PageTitle, withPageTransition } from "@shared";
 
@@ -7,6 +7,7 @@ export const Experience = withPageTransition(() => {
 		<div>
 			<PageTitle title="Experience" />
 			<ExperienceList />
+			<CreateExperience />
 		</div>
 	);
 });

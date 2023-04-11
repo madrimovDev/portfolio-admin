@@ -4,6 +4,7 @@ interface Props {
 	label?: string;
 	defaultValue?: InputHTMLAttributes<HTMLInputElement>["defaultValue"];
 	name: string;
+	direction?: "vertical" | "horizontal";
 	className?: HTMLAttributes<HTMLInputElement>["className"];
 }
 
@@ -12,9 +13,14 @@ export const Textarea: FC<Props> = ({
 	name,
 	defaultValue,
 	className,
+	direction = 'vertical',
 }) => {
 	return (
-		<div className={`flex flex-col gap-1 ${className}`}>
+		<div
+			className={`flex 
+			${className || ""} 
+			${direction === "vertical" ? "flex-col" : "flex-row items-center"} gap-1 `}
+		>
 			{label && <label htmlFor="">{label}</label>}
 			<textarea
 				defaultValue={defaultValue}
