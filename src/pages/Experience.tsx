@@ -1,9 +1,14 @@
-import React from 'react'
+import { CreateExperience, ExperienceList } from "@entities";
+import React from "react";
+import { PageTitle, withPageTransition } from "@shared";
 
-const Experience = () => {
-  return (
-    <div>Experience</div>
-  )
-}
+export const Experience = withPageTransition(() => {
+	return (
+		<div>
+			<PageTitle title="Experience" />
+			<ExperienceList />
+			<CreateExperience />
+		</div>
+	);
+});
 
-export default Experience
