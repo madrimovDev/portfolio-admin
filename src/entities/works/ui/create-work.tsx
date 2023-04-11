@@ -1,15 +1,14 @@
-import { Button, Drawer } from "@shared";
+import { Button, Drawer, useDisclosure } from "@shared";
 import React, { useState } from "react";
 
 export const CreateWork = () => {
-	const [open, setOpen] = useState<boolean>(false);
+	const { open, onClose, onOpen } = useDisclosure();
 	return (
 		<div>
-			<Button onClick={() => setOpen(!open)}>Create Work</Button>
+			<Button onClick={onOpen}>Create Work</Button>
 			<Drawer
-				onClose={() => setOpen(false)}
+				onClose={onClose}
 				open={open}
-				pos="right"
 			>
 				Drawer
 			</Drawer>

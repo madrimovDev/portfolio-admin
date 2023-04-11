@@ -1,47 +1,59 @@
-import React, { FC, ReactNode, useEffect, useRef, useState } from "react";
+import React, { FC, ReactNode, useRef } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "./button";
 import { BsX } from "react-icons/bs";
+import { useKeydown, useOutsideClick } from "@shared";
 
 interface Props {
-	pos?: "left" | "right";
 	open: boolean;
 	onClose: () => void;
 	children: ReactNode;
 }
 
-export const Drawer: FC<Props> = ({ children, open, pos = "left", onClose }) => {
+export const Drawer: FC<Props> = ({ children, open, onClose }) => {
+	const ref = useRef<HTMLDivElement>(null);
+	useOutsideClick(ref, onClose);
+	useKeydown("Escape", onClose);
 	const DrawerContainer = (
 		<AnimatePresence mode="wait">
 			{open && (
 				<motion.div
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
-					className="fixed z-50 w-full  h-screen inset-0 bg-stone-900/50"
+					exit={{
+						opacity: 0,
+						transition: {
+							delay: 0.25,
+						},
+					}}
+					transition={{
+						duration: 0.15,
+					}}
+					className="fixed z-50 w-full  h-screen inset-0 backdrop-blur-sm bg-stone-900/50"
 				>
 					<motion.div
+						ref={ref}
 						initial={{
 							x: "100%",
-							opacity: 0,
 						}}
 						animate={{
 							x: 0,
-							opacity: 1,
 						}}
 						exit={{
 							x: "100%",
-							opacity: 0,
 						}}
 						transition={{
-							duration: 0.5,
+							duration: 0.25,
 						}}
-						className={`h-screen max-w-xl w-full bg-stone-900 fixed top-0 right-0`}
-          >
-            <Button onClick={onClose}>
-              <BsX/>
-            </Button>
+						className={`h-screen max-w-xl w-full bg-stone-900 fixed top-0 right-0 p-4`}
+					>
+						<Button
+							danger
+							onClick={onClose}
+						>
+							<BsX />
+						</Button>
 						{children}
 					</motion.div>
 				</motion.div>
