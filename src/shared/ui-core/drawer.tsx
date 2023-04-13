@@ -1,9 +1,8 @@
 import React, { FC, ReactNode, useRef } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { Button } from "./button";
 import { BsX } from "react-icons/bs";
-import { useKeydown, useOutsideClick } from "@shared";
+import { IconButton, useKeydown, useOutsideClick } from "@shared";
 
 interface Props {
 	open: boolean;
@@ -30,7 +29,7 @@ export const Drawer: FC<Props> = ({ children, open, onClose }) => {
 					transition={{
 						duration: 0.15,
 					}}
-					className="fixed z-50 w-full  h-screen inset-0 backdrop-blur-sm bg-stone-900/50"
+					className="fixed z-50 w-full text-gray-100  h-screen inset-0 backdrop-blur-sm bg-stone-900/50"
 				>
 					<motion.div
 						ref={ref}
@@ -48,12 +47,9 @@ export const Drawer: FC<Props> = ({ children, open, onClose }) => {
 						}}
 						className={`h-screen max-w-xl w-full bg-stone-900 fixed top-0 right-0 p-4`}
 					>
-						<Button
-							danger
-							onClick={onClose}
-						>
+						<IconButton variant="ghost" onClick={onClose}>
 							<BsX />
-						</Button>
+						</IconButton>
 						{children}
 					</motion.div>
 				</motion.div>

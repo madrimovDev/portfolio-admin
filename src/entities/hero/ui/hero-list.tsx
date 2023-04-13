@@ -1,4 +1,4 @@
-import { Button, Input } from "@shared";
+import { Button, IconButton, Input } from "@shared";
 import React, { FC, useState } from "react";
 import { BsCheck, BsSave, BsX } from "react-icons/bs";
 
@@ -20,16 +20,16 @@ const ListItem: FC<Props> = ({ _key, value, type = "text" }) => {
 						name={_key.toLowerCase()}
 						defaultValue={value}
 					/>
-					<Button>
+					<IconButton>
 						<BsCheck />
-					</Button>
-					<Button
+					</IconButton>
+					<IconButton
 						onClick={() => setEdit(false)}
-						danger
 						type="reset"
+						variant="danger"
 					>
 						<BsX />
-					</Button>
+					</IconButton>
 				</form>
 			) : (
 				<span

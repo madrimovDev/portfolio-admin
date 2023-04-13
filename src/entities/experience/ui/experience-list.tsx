@@ -1,4 +1,4 @@
-import { Button, Input, Textarea } from "@shared";
+import { Button, IconButton, Input, Textarea } from "@shared";
 import React, { FC, useState } from "react";
 import { BsCheck, BsX } from "react-icons/bs";
 
@@ -12,7 +12,7 @@ const ListItem: FC<ItemProps> = ({ description, year }) => {
 
 	if (edit) {
 		return (
-			<form className="flex gap-4">
+			<form className="flex items-start gap-4">
 				<Input
 					className="w-[100px]"
 					name="year"
@@ -24,16 +24,15 @@ const ListItem: FC<ItemProps> = ({ description, year }) => {
 					className="w-full"
 					defaultValue={description}
 				/>
-				<Button>
+				<IconButton>
 					<BsCheck />
-				</Button>
-				<Button
+				</IconButton>
+				<IconButton
+					variant="danger"
 					onClick={() => setEdit(false)}
-					danger
-					type="reset"
 				>
 					<BsX />
-				</Button>
+				</IconButton>
 			</form>
 		);
 	}
@@ -63,5 +62,4 @@ export const ExperienceList = () => {
 		</ul>
 	);
 };
-
 

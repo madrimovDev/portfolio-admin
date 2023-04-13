@@ -5,7 +5,7 @@ import React, {
 	HTMLAttributes,
 	ReactNode,
 } from "react";
-import { AiOutlineLoading, AiOutlineLoading3Quarters } from "react-icons/ai";
+import { IconType } from "react-icons";
 
 interface ColorScheme {
 	danger: HTMLAttributes<HTMLElement>["className"];
@@ -19,7 +19,8 @@ const colorScheme: ColorScheme = {
 	danger: "bg-red-500 hover:bg-red-400 disabled:bg-red-700 active:bg-red-500",
 	success:
 		"bg-teal-500 hover:bg-teal-400 disabled:bg-teal-700 active:bg-teal-500",
-	ghost: "bg-transparent hover:bg-white/10 disabled:bg-white/30 active:bg-white/20",
+	ghost:
+		"bg-transparent hover:bg-white/10 disabled:bg-white/30 active:bg-white/20",
 };
 
 interface Props {
@@ -29,13 +30,9 @@ interface Props {
 	variant?: "primary" | "danger" | "success" | "ghost";
 }
 
-export const Button: FC<Props & HTMLAttributes<HTMLButtonElement>> = ({
-	children,
-	loading,
-	disabled,
-	variant = "primary",
-	...params
-}) => {
+export const IconButton: FC<
+	Props & ButtonHTMLAttributes<HTMLButtonElement>
+> = ({ children, loading, disabled, variant = "primary", ...params }) => {
 	const color = colorScheme[variant || "primary"];
 	return (
 		<button
@@ -44,20 +41,15 @@ export const Button: FC<Props & HTMLAttributes<HTMLButtonElement>> = ({
 			${color} 
 			disabled:cursor-no-drop 
 			transition-all  
-			px-4
-			py-2 
-			rounded-sm 
-			relative 
-			inline-flex 
-			gap-2
-			justify-center 
-			items-center
+			p-2
+      aspect-square 
+			rounded-sm  
 			font-semibold
+			inline-flex 
 			`}
 			{...params}
 		>
-			{children}{" "}
-			{loading && <AiOutlineLoading className="animate-spin" />}
+			{children}
 		</button>
 	);
 };
